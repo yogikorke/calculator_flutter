@@ -1,4 +1,3 @@
-import 'package:calculator/services/theme_service.dart';
 import 'package:calculator/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

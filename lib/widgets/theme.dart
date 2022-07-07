@@ -19,9 +19,8 @@ class Themes {
   );
 }
 
-TextStyle kTextStyle(double size, Color color) {
+TextStyle kTextStyle(double size) {
   return TextStyle(
-    color: color,
     fontSize: size,
     fontWeight: FontWeight.bold,
   );

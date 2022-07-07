@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-const Color colorBlueDark = Color(0xFF22252e);
-const Color colorBlue = Color(0xFF292D36);
-const Color colorRed = Color(0xFFD76061);
-const Color colorGreen = Color(0xFF3CF0CC);
+class ThemeService {
+  final _box = GetStorage();
+  final _key = "isDarkMode";
 
-TextStyle kTextStyle(double size, Color color) {
-  return TextStyle(
-    color: color,
-    fontSize: size,
-    fontWeight: FontWeight.bold,
-  );
+  _saveThemeToBox(bool isDarkMode) => _box.write(_key, isDarkMode);
+  _loadTheNeFromBox() => _box.read(_key) ?? false;
+
+  ThemeMode get theme => _loadTheNeFromBox() ? ThemeMode.dark : ThemeMode.light;
+
+  void switchTheme() {
+    Get.changeThemeMode(_loadTheNeFromBox() ? ThemeMode.dark : ThemeMode.light);
+    _saveThemeToBox(!_loadTheNeFromBox());
+  }
 }

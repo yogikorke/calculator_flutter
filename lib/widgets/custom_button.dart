@@ -1,5 +1,7 @@
 import 'package:calculator/services/theme_service.dart';
+import 'package:calculator/widgets/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({Key? key, required this.index}) : super(key: key);
@@ -13,14 +15,15 @@ class CustomButton extends StatelessWidget {
       width: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: colorBlueDark,
+        color: Get.isDarkMode ? colorBlueDark : colorGrey,
       ),
       child: Center(
         child: Text(
           _getRightSign(index),
           style: TextStyle(
-            color: _getButtonColor(index),
+            color: _getSignColor(index),
             fontSize: _getSize(index),
+            fontWeight: FontWeight.w700,
           ),
         ),
       ),
@@ -69,12 +72,12 @@ class CustomButton extends StatelessWidget {
     return '';
   }
 
-  Color _getButtonColor(int index) {
+  Color _getSignColor(int index) {
     if (index <= 2) return colorGreen;
     if (index == 3 || index == 7 || index == 11 || index == 15 || index == 19) {
       return colorRed;
     }
-    return Colors.white;
+    return Get.isDarkMode ? Colors.white : Colors.black;
   }
 
   double _getSize(int index) {

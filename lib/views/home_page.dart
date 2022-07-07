@@ -1,13 +1,17 @@
-import 'package:calculator/services/theme_service.dart';
+import 'package:calculator/controllers/calculator_controller.dart';
 import 'package:calculator/widgets/body_container.dart';
-import 'package:calculator/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/switchThemeButton.dart';
 import '../widgets/theme.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final CalculatorController _controller = Get.put(CalculatorController());
+
+  var answer = '';
+  //var userInput = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +34,20 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('26x7', style: kTextStyle(30)),
-                  Text('182', style: kTextStyle(40)),
+                  Obx(() {
+                    final userInput = _controller.input.value;
+                    final result = _controller.result.value;
+                    return Column(
+                      children: [
+                        Text(userInput, style: kTextStyle(30)),
+                        Text(result, style: kTextStyle(40)),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
-            const BodyContainer(),
+            BodyContainer(),
           ],
         ),
       ),

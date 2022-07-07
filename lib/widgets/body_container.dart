@@ -1,10 +1,15 @@
+import 'package:calculator/constants.dart';
 import 'package:calculator/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/calculator_controller.dart';
 import 'custom_button.dart';
 
 class BodyContainer extends StatelessWidget {
-  const BodyContainer({Key? key}) : super(key: key);
+  BodyContainer({Key? key}) : super(key: key);
+
+  final CalculatorController _controller = Get.find<CalculatorController>();
+  int count = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class BodyContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 20,
+        itemCount: signAndNumbers.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
           crossAxisSpacing: 10,
@@ -37,7 +42,26 @@ class BodyContainer extends StatelessWidget {
           return InkWell(
             borderRadius: BorderRadius.circular(20),
             onTap: () {
-              //operation
+              if (signAndNumbers[index] != "AC" &&
+                  signAndNumbers[index] != "=") {
+                _controller.getUserInput(signAndNumbers[index].toString());
+              }
+
+              if (signAndNumbers[index] == "AC") {
+                _controller.clearInput();
+              }
+              if (signAndNumbers[index] == "=") {
+                // if (count == 2) {
+                //   //_controller.history(count);
+                //   count = 0;
+                //   return;
+                // }
+
+                //if (count == 1) {
+                _controller.operation();
+                // count += 1;
+                //}
+              }
             },
             child: CustomButton(index: index),
           );

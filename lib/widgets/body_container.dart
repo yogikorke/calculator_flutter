@@ -1,7 +1,6 @@
 import 'package:calculator/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'custom_button.dart';
 
 class BodyContainer extends StatelessWidget {
@@ -10,8 +9,8 @@ class BodyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.62,
-      width: MediaQuery.of(context).size.width,
+      height: Get.height * 0.62,
+      width: Get.size.width,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(40),

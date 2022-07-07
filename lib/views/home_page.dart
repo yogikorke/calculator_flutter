@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
       body: SizedBox(
-        width: MediaQuery.of(context).size.width,
+        width: Get.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

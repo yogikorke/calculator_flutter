@@ -38,7 +38,7 @@ class CustomButton extends StatelessWidget {
       'x',
       '-',
       '+',
-      'AC',
+      'CRL',
       '0',
       '.',
       '='

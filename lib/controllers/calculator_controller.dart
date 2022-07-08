@@ -41,20 +41,26 @@ class CalculatorController extends GetxController {
         result.value != '0' && digit == '/' ||
         result.value != '0' && digit == 'x' ||
         result.value != '0' && digit == '-') {
-      final String newNum = result.value;
-      _clearInput();
-      _getUserInput(newNum);
+      if (result.value.contains('-')) {
+        final newV = double.parse(result.value.split('-')[1]);
+        _clearInput();
+        userInput.insert(0, '-');
+        userInput.insert(1, newV.toString());
+        _makeNumber();
+      }
     }
 
     if (userInput.contains('+') ||
         userInput.contains('/') ||
         userInput.contains('x')) {
       if (digit == '+' || digit == '/' || digit == 'x' || digit == '-') {
-        //print(digit);
+        return;
       } else {
         userInput.add(digit);
         _makeNumber();
       }
+    } else if (digit == '.' && userInput.isEmpty) {
+      return;
     } else {
       userInput.add(digit);
       _makeNumber();

@@ -9,7 +9,6 @@ class BodyContainer extends StatelessWidget {
   BodyContainer({Key? key}) : super(key: key);
 
   final CalculatorController _controller = Get.find<CalculatorController>();
-  int count = 1;
 
   @override
   Widget build(BuildContext context) {

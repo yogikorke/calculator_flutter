@@ -100,10 +100,18 @@ class CalculatorController extends GetxController {
   void _splitInput() {
     _getOperator();
     try {
-      _firstNum = double.parse(input.split(operator)[0]);
-      _secondNum = double.parse(input.split(operator)[1]);
+      if (operator == '-' && userInput[0] == '-') {
+        _firstNum = -double.parse(input.split(operator)[1]);
+        _secondNum = -double.parse(input.split(operator)[2]);
+      } else if (operator != '-' && userInput[0] == '-') {
+        _firstNum = double.parse(input.split(operator)[0]);
+        _secondNum = double.parse(input.split(operator)[1]);
+      } else if (userInput[0] != '-') {
+        _firstNum = double.parse(input.split(operator)[0]);
+        _secondNum = double.parse(input.split(operator)[1]);
+      }
     } catch (e) {
-      print('DEBUG: Calculation error $e');
+      print('DEBUG: Error trying to split $e');
     }
   }
 
@@ -132,9 +140,6 @@ class CalculatorController extends GetxController {
 
   void _operation() {
     _splitInput();
-    if (userInput[0] == '-') {
-      _firstNum = -_firstNum;
-    }
 
     if (result.value != '0') {
       final String newNum = result.value;
@@ -150,11 +155,18 @@ class CalculatorController extends GetxController {
       }
     }
 
-    if (input.contains('-')) {
+    if (input.contains('-') && userInput[0] != '-') {
       try {
         result.value = (_firstNum - _secondNum).toString();
       } catch (e) {
-        print('DEBUG: Calculation error $e');
+        print('DEBUG: $e');
+      }
+    }
+    if (operator == '-' && userInput[0] == '-') {
+      try {
+        result.value = (_firstNum + _secondNum).toString();
+      } catch (e) {
+        print('DEBUG: $e');
       }
     }
     if (input.contains('/')) {

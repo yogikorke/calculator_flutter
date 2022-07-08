@@ -38,6 +38,7 @@ class HomePage extends StatelessWidget {
                     final userInput = _controller.input.value;
                     final result = _controller.result.value;
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(userInput, style: kTextStyle(30)),
                         Text(result, style: kTextStyle(40)),

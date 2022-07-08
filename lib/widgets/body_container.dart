@@ -43,8 +43,22 @@ class BodyContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             onTap: () {
               if (signAndNumbers[index] != "AC" &&
-                  signAndNumbers[index] != "=") {
+                  signAndNumbers[index] != "=" &&
+                  signAndNumbers[index] != "CRL" &&
+                  signAndNumbers[index] != "+/-" &&
+                  signAndNumbers[index] != "%") {
                 _controller.getUserInput(signAndNumbers[index].toString());
+              }
+              if (signAndNumbers[index] == "%") {
+                _controller.percent();
+              }
+
+              if (signAndNumbers[index] == "+/-") {
+                _controller.plusOrMinus();
+              }
+
+              if (signAndNumbers[index] == "CRL") {
+                _controller.clearLastInput();
               }
 
               if (signAndNumbers[index] == "AC") {

@@ -42,40 +42,7 @@ class BodyContainer extends StatelessWidget {
           return InkWell(
             borderRadius: BorderRadius.circular(20),
             onTap: () {
-              if (signAndNumbers[index] != "AC" &&
-                  signAndNumbers[index] != "=" &&
-                  signAndNumbers[index] != "CRL" &&
-                  signAndNumbers[index] != "+/-" &&
-                  signAndNumbers[index] != "%") {
-                _controller.getUserInput(signAndNumbers[index].toString());
-              }
-              if (signAndNumbers[index] == "%") {
-                _controller.percent();
-              }
-
-              if (signAndNumbers[index] == "+/-") {
-                _controller.plusOrMinus();
-              }
-
-              if (signAndNumbers[index] == "CRL") {
-                _controller.clearLastInput();
-              }
-
-              if (signAndNumbers[index] == "AC") {
-                _controller.clearInput();
-              }
-              if (signAndNumbers[index] == "=") {
-                // if (count == 2) {
-                //   //_controller.history(count);
-                //   count = 0;
-                //   return;
-                // }
-
-                //if (count == 1) {
-                _controller.operation();
-                // count += 1;
-                //}
-              }
+              _controller.digitValidator(signAndNumbers[index].toString());
             },
             child: CustomButton(index: index),
           );

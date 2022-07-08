@@ -7,11 +7,7 @@ import '../widgets/theme.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-
   final CalculatorController _controller = Get.put(CalculatorController());
-
-  var answer = '';
-  //var userInput = '';
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,7 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(userInput, style: kTextStyle(30)),
-                        Text(result, style: kTextStyle(40)),
+                        Text(result, style: kTextStyle(50)),
                       ],
                     );
                   }),

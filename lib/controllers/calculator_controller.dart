@@ -8,26 +8,76 @@ class CalculatorController extends GetxController {
   String operator = '';
   final List<String> userInput = [];
 
-  void getUserInput(String int) {
-    userInput.add(int);
-    makeNumber();
+  void digitValidator(String digit) {
+    if (digit != "AC" &&
+        digit != "=" &&
+        digit != "CRL" &&
+        digit != "+/-" &&
+        digit != "%") {
+      _getUserInput(digit);
+    }
+    if (digit == "%") {
+      _percent();
+    }
+
+    if (digit == "+/-") {
+      _plusOrMinus();
+    }
+
+    if (digit == "CRL") {
+      _clearLastInput();
+    }
+
+    if (digit == "AC") {
+      _clearInput();
+    }
+    if (digit == "=") {
+      _operation();
+    }
   }
 
-  void clearInput() {
+  void _getUserInput(String digit) {
+    if (result.value != '0' && digit == '+' ||
+        result.value != '0' && digit == '/' ||
+        result.value != '0' && digit == 'x' ||
+        result.value != '0' && digit == '-') {
+      final String newNum = result.value;
+      _clearInput();
+      _getUserInput(newNum);
+    }
+
+    if (userInput.contains('+') ||
+        userInput.contains('/') ||
+        userInput.contains('x')) {
+      if (digit == '+' || digit == '/' || digit == 'x' || digit == '-') {
+        //print(digit);
+      } else {
+        userInput.add(digit);
+        _makeNumber();
+      }
+    } else {
+      userInput.add(digit);
+      _makeNumber();
+    }
+  }
+
+  void _clearInput() {
     userInput.clear();
     result.value = '0';
-    makeNumber();
+    _makeNumber();
   }
 
-  void clearLastInput() {
-    userInput.removeAt(userInput.length - 1);
+  void _clearLastInput() {
+    if (userInput.isNotEmpty) {
+      userInput.removeAt(userInput.length - 1);
+    }
     if (userInput.isEmpty) {
       result.value = '0';
     }
-    makeNumber();
+    _makeNumber();
   }
 
-  void makeNumber() {
+  void _makeNumber() {
     input.value = '';
     for (var num in userInput) {
       input.value += num;
@@ -57,12 +107,19 @@ class CalculatorController extends GetxController {
     }
   }
 
-  void percent() {
-    _firstNum = double.parse(input.value);
-    result.value = (_firstNum / 100).toString();
+  void _percent() {
+    if (result.value != '0') {
+      final double oldResult = double.parse(result.value);
+      _clearInput();
+      _getUserInput(oldResult.toString());
+      result.value = (oldResult / 100).toString();
+    } else {
+      _firstNum = double.parse(input.value);
+      result.value = (_firstNum / 100).toString();
+    }
   }
 
-  void plusOrMinus() {
+  void _plusOrMinus() {
     if (!userInput.contains('-')) {
       userInput.insert(0, '-');
     } else {
@@ -70,13 +127,19 @@ class CalculatorController extends GetxController {
         userInput.removeAt(0);
       }
     }
-    makeNumber();
+    _makeNumber();
   }
 
-  void operation() {
+  void _operation() {
     _splitInput();
     if (userInput[0] == '-') {
       _firstNum = -_firstNum;
+    }
+
+    if (result.value != '0') {
+      final String newNum = result.value;
+      _clearInput();
+      _getUserInput(newNum);
     }
 
     if (input.contains('+')) {
@@ -86,6 +149,7 @@ class CalculatorController extends GetxController {
         print('DEBUG: Calculation error $e');
       }
     }
+
     if (input.contains('-')) {
       try {
         result.value = (_firstNum - _secondNum).toString();
@@ -93,7 +157,6 @@ class CalculatorController extends GetxController {
         print('DEBUG: Calculation error $e');
       }
     }
-
     if (input.contains('/')) {
       try {
         if (_secondNum > 0) {
@@ -105,7 +168,6 @@ class CalculatorController extends GetxController {
         print('DEBUG: Calculation error $e');
       }
     }
-
     if (input.contains('x')) {
       try {
         result.value = (_firstNum * _secondNum).toString();

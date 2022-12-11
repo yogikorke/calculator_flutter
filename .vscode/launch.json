@@ -1,0 +1,84 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Android on Phone Emulator",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "emulator-5554"
+            ]
+        },
+        {
+            "name": "Android on Redmi Note 9 Pro Max",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "Redmi Note 9 Pro Max"
+            ]
+        },
+        {
+            "name": "Android on Redmi Note 4",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "Redmi Note 4"
+            ]
+        },
+        {
+            "name": "iOS on iPhone 7",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "iPhone"
+            ]
+        },
+        {
+            "name": "Web on Chrome",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "Chrome",
+                "--web-renderer",
+                "html"
+            ]
+        },
+        {
+            "name": "Web on Edge",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "console": "debugConsole",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "Edge",
+                "--web-renderer",
+                "html"
+            ]
+        }
+    ]
+}
